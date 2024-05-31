@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mysql_database_1:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: sample_db
+    networks:
+      - my_network
+
+  data_loader:
+    build:
+      context: ./data_loader_script
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql_database_1
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
