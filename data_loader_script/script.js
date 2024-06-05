@@ -3,9 +3,9 @@ const fs = require('fs');
 const csv = require('csv-parser');
 
 const connectionConfig = {
-    host: 'deptraiqua',
-    user: 'root',
-    password: 'rootpassword',
+    host: 'mysql_database',
+    user: 'user',
+    password: 'password',
     database: 'movies'
 };
 
@@ -57,6 +57,7 @@ async function main() {
 
         for (const fileName of fileNames) {
             let genre = fileName.split(".")[0];
+            console.log(genre)
             fs.createReadStream(dirPath + "/" + fileName)
                 .pipe(csv())
                 .on('data', async (data) => {
@@ -92,8 +93,6 @@ async function main() {
                 .on('end', () => {
                     console.log(`Finished processing ${fileName}`);
                 });
-
-            break
         }
 
         console.log("FINISHED");

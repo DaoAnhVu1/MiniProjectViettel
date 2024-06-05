@@ -16,5 +16,11 @@ COPY data ./data
 # Copy the script.js file to the working directory
 COPY script.js .
 
-# Command to run the script.js
-CMD ["node", "script.js"]
+# Copy the wait-for-dremio.sh script to the working directory
+COPY wait-for-dremio.sh /usr/local/bin/wait-for-dremio.sh
+
+# Ensure the wait-for-dremio.sh script is executable
+RUN chmod +x /usr/local/bin/wait-for-dremio.sh
+
+# Command to run the script.js, but use the wait-for-dremio.sh as the entrypoint
+ENTRYPOINT ["/usr/local/bin/wait-for-dremio.sh", "node", "script.js"]

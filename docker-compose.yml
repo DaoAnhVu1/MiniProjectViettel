@@ -6,14 +6,13 @@ services:
     platform: linux/x86_64
     image: dremio/dremio-oss:latest
     ports:
-      - 9048:9047
+      - 9047:9047
       - 31010:31010
       - 32010:32010
       - 45678:45678
     container_name: dremio
     networks:
-      dremio-mysql-superset:
-        # MySQL
+      demo:
 
   data_loader:
     build:
@@ -22,12 +21,12 @@ services:
     depends_on:
       - mysql
     networks:
-      dremio-mysql-superset:
+      demo:
 
   mysql:
     image: mysql:latest
     container_name: mysql
-    hostname: deptraiqua
+    hostname: mysql_database
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_DATABASE=movies
@@ -36,8 +35,7 @@ services:
     ports:
       - "3307:3306"
     networks:
-      dremio-mysql-superset:
-        # Superset
+      demo:
 
 networks:
-  dremio-mysql-superset:
+  demo:
