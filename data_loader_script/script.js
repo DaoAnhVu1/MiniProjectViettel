@@ -3,10 +3,10 @@ const fs = require('fs');
 const csv = require('csv-parser');
 
 const connectionConfig = {
-    host: 'mysql_database_1',
+    host: 'deptraiqua',
     user: 'root',
-    password: 'root_password',
-    database: 'movie'
+    password: 'rootpassword',
+    database: 'movies'
 };
 
 const sequelize = new Sequelize(connectionConfig.database, connectionConfig.user, connectionConfig.password, {
